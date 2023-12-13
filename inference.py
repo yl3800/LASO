@@ -5,7 +5,7 @@ import numpy as np
 import pdb
 import os
 from PIL import Image
-from LASO.model.PointRefer import get_IAGNet
+from LASO.model.PointRefer import get_PointRefer
 from utils.visualization_point import get_affordance_label
 from torchvision import transforms
 import open3d as o3d
@@ -44,7 +44,7 @@ def extract_point_file(point_path):
 
 def inference_single(img_path, box_path, GT_path, model_path, results_folder):
 
-    model = get_IAGNet(pre_train=False)
+    model = get_PointRefer(pre_train=False)
     checkpoint = torch.load(model_path, map_location='cpu')
     model.load_state_dict(checkpoint['model'])
     model = model.cuda()
@@ -121,7 +121,7 @@ def inference_single(img_path, box_path, GT_path, model_path, results_folder):
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model_path', type=str, default='ckpts/IAG_Seen.pt', help='model path')
+    parser.add_argument('--model_path', type=str, default='ckpts/PointRefer_Seen.pt', help='model path')
     parser.add_argument('--img_path', type=str, default='Demo/Img_Test_Bag_lift_1.jpg', help='test img path')
     parser.add_argument('--point_path', type=str, default='Demo/Point_Test_Bag_1.txt', help='test point path')
     parser.add_argument('--box_path', type=str, default='Demo/Img_Test_Bag_lift_1.json', help='test point path')

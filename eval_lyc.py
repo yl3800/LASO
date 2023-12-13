@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 from torch.utils.data import DataLoader
-from LASO.model.PointRefer import get_IAGNet
+from LASO.model.PointRefer import get_PointReferNet
 from utils.util import seed_torch, read_yaml
 from data_utils.shapenetpart import AffordQ
 from sklearn.metrics import roc_auc_score
@@ -200,10 +200,10 @@ if __name__=='__main__':
     test_loader = DataLoader(test_dataset, batch_size=8, num_workers=8, shuffle=False)
     
     dict = read_yaml('config/config_seen.yaml')
-    model = get_IAGNet(emb_dim=dict['emb_dim'],
+    model = get_PointReferNet(emb_dim=dict['emb_dim'],
                        proj_dim=dict['proj_dim'], num_heads=dict['num_heads'], N_raw=dict['N_raw'],
                        num_affordance = dict['num_affordance'])
-    model_checkpoint = torch.load('/storage_fast/ycli/3d_affordance/IAGNet_easyloader_predCLS/runs/train/IAG/best_model-balanced_data_at_10.24_0.47.31.pt', map_location='cuda:0')
+    model_checkpoint = torch.load('/storage_fast/ycli/3d_affordance/PointReferNet_easyloader_predCLS/runs/train/PointRefer/best_model-balanced_data_at_10.24_0.47.31.pt', map_location='cuda:0')
     model.load_state_dict(model_checkpoint['model'])
     model.to(device)
    

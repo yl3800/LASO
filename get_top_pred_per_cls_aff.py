@@ -2,7 +2,7 @@ import torch
 import os
 import numpy as np
 from torch.utils.data import DataLoader
-from LASO.model.PointRefer import get_IAGNet
+from LASO.model.PointRefer import get_PointReferNet
 from utils.util import seed_torch, read_yaml
 from data_utils.shapenetpart import AffordQ
 from tqdm import tqdm
@@ -143,10 +143,10 @@ if __name__=='__main__':
     test_dataset = AffordQ('test')
     
     dict = read_yaml('config/config_seen.yaml')
-    model = get_IAGNet(emb_dim=dict['emb_dim'],
+    model = get_PointReferNet(emb_dim=dict['emb_dim'],
                        proj_dim=dict['proj_dim'], num_heads=dict['num_heads'], N_raw=dict['N_raw'],
                        num_affordance = dict['num_affordance'], n_groups=20)
-    model_checkpoint = torch.load('/storage_fast/ycli/3d_affordance/10270_3GP_Q_Q_change_group/runs/train/IAG/best_model-20groups-1_at_10.28_1.20.54.pt', map_location='cuda:0')
+    model_checkpoint = torch.load('/storage_fast/ycli/3d_affordance/10270_3GP_Q_Q_change_group/runs/train/PointRefer/best_model-20groups-1_at_10.28_1.20.54.pt', map_location='cuda:0')
     model.load_state_dict(model_checkpoint['model'])
     model.to(device)
    

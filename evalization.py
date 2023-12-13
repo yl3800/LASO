@@ -2,7 +2,7 @@ import torch
 from sklearn.metrics import roc_auc_score
 from torch.utils.data import DataLoader
 from data_utils.dataset_PIAD import PIAD
-from LASO.model.PointRefer import get_IAGNet
+from LASO.model.PointRefer import get_PointReferNet
 from utils.eval import SIM
 from numpy import nan
 import numpy as np
@@ -37,7 +37,7 @@ def Evalization(dataset, data_loader, model_path, use_gpu, Seeting):
     for aff in Affordance_list:
         exec(f'{aff} = [[], [], [], []]')
 
-    model = get_IAGNet(pre_train=False)
+    model = get_PointReferNet(pre_train=False)
 
     checkpoint = torch.load(model_path, map_location='cuda:0')
     model.load_state_dict(checkpoint['model'])
@@ -206,7 +206,7 @@ if __name__=='__main__':
 
     parser.add_argument('--gpu', type=str, default='cuda:0', help='gpu device id')
     parser.add_argument('--use_gpu', type=str, default=True, help='whether or not use gpus')
-    parser.add_argument('--checkpoint_path', type=str, default='ckpt/IAG_Seen.pt', help='checkpoint path')
+    parser.add_argument('--checkpoint_path', type=str, default='ckpt/PointRefer_Seen.pt', help='checkpoint path')
     parser.add_argument('--yaml', type=str, default='config/config_seen.yaml', help='yaml path')
 
     opt = parser.parse_args()

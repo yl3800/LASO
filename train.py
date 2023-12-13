@@ -35,7 +35,7 @@ set_gpu_devices(opt.gpu)
 
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from LASO.model.PointRefer import get_IAGNet
+from LASO.model.PointRefer import get_PointRefer
 from utils.loss import HM_Loss, kl_div
 from utils.eval import evaluating, SIM
 from eval_lyc import evaluate, print_metrics_in_table 
