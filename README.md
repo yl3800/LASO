@@ -1,0 +1,1 @@
+# code for LASO: Language-guided Affordance Segmentation on 3D Object

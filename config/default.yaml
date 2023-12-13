@@ -1,0 +1,10 @@
+bs: 32
+lr: 0.0001
+Epoch: 60
+num_heads: 4
+emb_dim: 512
+proj_dim: 512
+N_p: 64
+N_raw: 2048
+num_affordance: 23
+pairing_num: 2
