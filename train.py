@@ -8,7 +8,7 @@ from utils.logger import logger as loggger
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-v", type=str, required=True, help="version")
+parser.add_argument("-v", type=str, required=True, help="version", default="try")
 parser.add_argument("-bs", type=int, action="store", help="BATCH_SIZE", default=16)
 parser.add_argument("-lr", type=float, action="store", help="learning rate", default=1e-4)
 parser.add_argument("-tlr", type=float, action="store", help="learning rate for text encoder", default=5e-6)
@@ -35,7 +35,7 @@ set_gpu_devices(opt.gpu)
 
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from LASO.model.PointRefer import get_PointRefer
+from model.PointRefer import get_PointRefer
 from utils.loss import HM_Loss, kl_div
 from utils.eval import evaluating, SIM
 from eval_lyc import evaluate, print_metrics_in_table 

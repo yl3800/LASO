@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 from torch.utils.data import DataLoader
-from LASO.model.PointRefer import get_PointReferNet
+from model.PointRefer import get_PointRefer
 from utils.util import seed_torch, read_yaml
 from data_utils.shapenetpart import AffordQ
 from sklearn.metrics import roc_auc_score

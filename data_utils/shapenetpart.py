@@ -22,7 +22,7 @@ class AffordQ(Dataset):
                  split='train',
                  **kwargs
                  ):
-        data_root='../../3d_affordance/AffordanceNet_balanced_class'
+        data_root='../../3d_affordance/LASO_dataset'
 
         self.split = split
         #
@@ -38,16 +38,13 @@ class AffordQ(Dataset):
 
         with open(os.path.join(data_root, f'anno_{split}.pkl'), 'rb') as f:
             self.anno = pickle.load(f)
-            # sample_size = math.ceil(len(self.anno) / 50)
-            # self.anno = random.sample(self.anno, sample_size)
         
         with open(os.path.join(data_root, f'objects_{split}.pkl'), 'rb') as f:
             self.objects = pickle.load(f)
 
         # Load the CSV file, and use lower case
-        self.question_df = pd.read_csv(os.path.join(data_root, 'Affordance-Question15.csv'))
+        self.question_df = pd.read_csv(os.path.join(data_root, 'Affordance-Question.csv'))
     
-        # self.q_emb = np.load(os.path.join(data_root, 'question_bert.npy'))
         self.len = len(self.anno)
        
         print(f"load {split} set successfully, lenth {len(self.anno)}")
@@ -65,8 +62,8 @@ class AffordQ(Dataset):
 
 
     def find_rephrase(self, df, object_name, affordance):
-        qid = str(np.random.randint(0, 15)) if self.split == 'train' else '1'
-        qid = 'Question'+qid 
+        qid = str(np.random.randint(1, 15)) if self.split == 'train' else '0'
+        qid = 'Question'+qid
         result = df.loc[(df['Object'] == object_name) & (df['Affordance'] == affordance), [qid]]
         if not result.empty:
             # return result.index[0], result.iloc[0]['Rephrase']
@@ -97,9 +94,6 @@ class AffordQ(Dataset):
 if __name__ == '__main__':
     train = AffordQ('train')
     print(len(train))
-    # test = ShapeNetPartNormal(num_points=2048, split='test')
     
     for p,cls,mask,q,aff in train:
         print(q)
-        # print([i.shape for i in p], cls, [i.shape for i in mask], q, [i for i in aff])
-        print("####"*10)
